@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <section class="container mt-6">
+        <h2 class="text-center">Crear Laboratorio</h2>
+            <div class="row justify content-center">
+                <div class="col-md-5">
+                    <form action="{%url 'crear_laboratorio' %}" method="post">
+                        {% csrf_token %}
+                        {{laboratorio_form.as_p}}
+
+                        {% if laboratorio_form.errors %}
+                        <ul>
+                            {% for field, errors in laboratorio_form.errors.items %}
+                                <li>{{ field }}: {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <input type="submit" value="Guardar" class="btn btn-primary w-100">
+                    </form>
+                    <p>¿Información de los laboratorios?</p>
+                    <a href="{% url 'listar_laboratorios' %}">Ir al información de los laboratorios--&gt; </a> 
+
+                </div>
+
+            </div>
+
+
+    </section> 
+
+
+{% endblock %}

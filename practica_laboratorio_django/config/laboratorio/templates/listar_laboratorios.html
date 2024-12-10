@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% load bootstrap5 %}
+{% block content %}
+    <section class="container mt-5">
+        <h2>Lista Laboratorios</h2>
+        <!-- {# Display django.contrib.messages as Bootstrap alerts #} -->
+        {% bootstrap_messages %}
+        {% if laboratorios %}
+        <!-- tabla con vehiculos -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">País</th>
+              <th scope="col">Acciones</th>
+
+            </tr>
+          </thead>
+          <tbody>
+          {% for laboratorio in laboratorios %}
+            <tr>
+              <td>{{ laboratorio.id }}</td>
+              <td>{{ laboratorio.nombre }}</td>
+              <td>{{ laboratorio.ciudad }}</td>
+              <td>{{ laboratorio.pais }}</td>
+              
+              <td>  
+                <a class="btn" href="{% url 'editar_laboratorio' laboratorio_id=laboratorio.id %}" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                  <i class="fa fa-edit text-primary"></i>
+                </a>
+                <a class="btn" href="{% url 'eliminar_laboratorio' laboratorio_id=laboratorio.id %}" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar">
+                  <i class="fa fa-edit text-danger"></i>
+                </a>
+     
+              </td>
+
+
+            </tr>
+          {% empty %}
+            <tr>
+                <td colspan="4">No hay laboratorios disponibles</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No hay laboratorios disponibles</p>
+        {% endif %}
+    
+        <p>¿Información de los laboratorios?</p>
+        <a class="nav-link" href="{% url 'index'  %}" style="text-decoration:underline";><h5> &lt;--Ir a página de Inicio</h5></a>
+        <p>Usted ha visto esta pagina {{ nro_visitas }} veces </p>
+
+    </section>
+{% endblock %}

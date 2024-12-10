@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <section class="container mt-5">
+        <h2 class="text-center">Crear Producto</h2>
+            <div class="row justify content-center">
+                <div class="col-md-4">
+                    <form action="{%url 'crear' %}" method="post">
+                        {% csrf_token %}
+                        {{producto_form.as_p}}
+
+                        {% if producto_form.errors %}
+                        <ul>
+                            {% for field, errors in producto_form.errors.items %}
+                                <li>{{ field }}: {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <input type="submit" value="Guardar" class="btn btn-primary w-100">
+                    </form>
+                </div>
+
+            </div>
+
+
+    </section> 
+
+
+{% endblock %}
